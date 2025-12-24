@@ -88,7 +88,7 @@ section.active {
 <body>
 
 <!-- 🎵 MUSIC -->
-<audio id="music" preload="auto">
+<audio id="music">
   <source src="https://dl.dropboxusercontent.com/scl/fi/cxpiz6swa4jkldveq1ztz/Die-With-A-Smile-PagalHits-AudioTrimmer.com.mp3" type="audio/mpeg">
 </audio>
 
@@ -114,11 +114,10 @@ section.active {
 <section id="message">
     <div class="message-box">
         <p>
-Merry merry merry Christmas 🎄🎁  
-To my cute, kind, amazing woman ❤️  
-You are brave, strong, soft, and beautiful.  
-
-I don’t want any gift because I already have the best one — **you**.  
+Merry merry merry Christmas 🎄🎁<br>
+To my cute, kind, amazing woman ❤️<br>
+You are brave, strong, soft, and beautiful.<br><br>
+I don’t want any gift because I already have the best one — <strong>you</strong>.<br>
 Take care and be safe. I’m always with you 🫂
         </p>
         <div class="envelope" onclick="goTo('hug')">Continue 🤍</div>
@@ -162,10 +161,10 @@ function goTo(id) {
     document.getElementById(id).classList.add("active");
 }
 
-/* ENVELOPE OPEN = MUSIC */
+/* ENVELOPE OPEN = MUSIC START */
 function openEnvelope() {
     const music = document.getElementById("music");
-    music.currentTime = 28;
+    music.currentTime = 28; // start from 28 seconds
     music.play();
     goTo("message");
 }
