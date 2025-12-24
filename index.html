@@ -104,7 +104,7 @@ section.active {
 <!-- ENVELOPE -->
 <section id="envelope">
     <h1>You Won 💕</h1>
-    <div class="envelope" onclick="openEnvelope()">Open Envelope ✉️</div>
+    <div class="envelope" onclick="goTo('message')">Open Envelope ✉️</div>
 </section>
 
 <!-- MESSAGE -->
@@ -155,13 +155,14 @@ function play(cell) {
 function goTo(id) {
     document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
     document.getElementById(id).classList.add("active");
-}
 
-/* OPEN ENVELOPE = PLAY MUSIC */
-function openEnvelope() {
-    const music = document.getElementById("music");
-    music.play(); // play full song from start
-    goTo("message");
+    // Automatically play music when envelope is shown
+    if(id === "envelope"){
+        const music = document.getElementById("music");
+        music.play().catch(e=>{
+            console.log("Autoplay blocked. Tap anywhere to play manually.");
+        });
+    }
 }
 </script>
 
