@@ -28,7 +28,6 @@ section.active {
     display: flex;
 }
 
-/* Envelope */
 .envelope {
     background: #fff;
     color: #f38aa3;
@@ -44,7 +43,6 @@ section.active {
     transform: scale(1.05);
 }
 
-/* Tic Tac Toe */
 .grid {
     display: grid;
     grid-template-columns: repeat(3, 90px);
@@ -68,7 +66,6 @@ section.active {
     background: #ffd1dc;
 }
 
-/* Message */
 .message-box {
     background: rgba(255,255,255,0.95);
     color: #f38aa3;
@@ -87,11 +84,10 @@ section.active {
 
 <body>
 
-<!-- 🎵 MUSIC -->
-<audio id="music">
+<!-- MUSIC -->
+<audio id="music" loop>
   <source src="https://dl.dropboxusercontent.com/scl/fi/cxpiz6swa4jkldveq1ztz/Die-With-A-Smile-PagalHits-AudioTrimmer.com.mp3" type="audio/mpeg">
 </audio>
-
 
 <!-- START -->
 <section id="start" class="active">
@@ -136,7 +132,6 @@ Take care and be safe. I’m always with you 🫂
 /* TIC TAC TOE */
 const board = document.getElementById("board");
 let played = false;
-
 const initialState = ["X","X","","O","O","X","O","X","O"];
 
 initialState.forEach(val => {
@@ -162,22 +157,11 @@ function goTo(id) {
     document.getElementById(id).classList.add("active");
 }
 
-/* ENVELOPE OPEN = MUSIC START */
+/* OPEN ENVELOPE = PLAY MUSIC */
 function openEnvelope() {
     const music = document.getElementById("music");
-
-    // Wait until audio metadata is loaded so currentTime can be set
-    music.addEventListener('loadedmetadata', function() {
-        music.currentTime = 28; // jump to 28 seconds
-        music.play();
-    }, { once: true });
-
-    // Trigger loading in case it hasn't started yet
-    music.load();
-
+    music.play(); // play full song from start
     goTo("message");
-}
-
 }
 </script>
 
