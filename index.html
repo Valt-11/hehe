@@ -87,7 +87,7 @@ section.active {
 
 <!-- MUSIC -->
 <audio id="music" loop>
-  <source src="https://dl.dropboxusercontent.com/s/cxpiz6swa4jkldveq1ztz/Die-With-A-Smile-PagalHits-AudioTrimmer.com.mp3" type="audio/mpeg">
+  <source src="https://voca.ro/126Uym0Qyh4X" type="audio/mpeg">
   Your browser does not support the audio element.
 </audio>
 
@@ -113,11 +113,12 @@ section.active {
 <section id="message">
     <div class="message-box">
         <p>
-Merry merry merry Christmas 🎄🎁<br>
-To my cute, kind, amazing woman ❤️<br>
-You are brave, strong, soft, and beautiful.<br><br>
-I don’t want any gift because I already have the best one — <strong>you</strong>.<br>
-Take care and be safe. I’m always with you 🫂
+Merry merry merry Christmas 🎄🎁 to my cute, kind, amazing woman ❤️. <br>
+You are brave, strong, soft, and beautiful. <br><br>
+I’m so glad to have you in my life. I can’t even describe it in words 🥺❤️. <br>
+I’m here for you always. Don’t take too much stress, you can do it. You are getting better day by day.<br><br>
+I don’t want any gift because I already have the best one — <strong>you</strong>. <br>
+So take care of yourself and be safe 🫂.
         </p>
         <div class="envelope" onclick="goTo('hug')">Continue 🤍</div>
     </div>
@@ -126,8 +127,7 @@ Take care and be safe. I’m always with you 🫂
 <!-- HUG -->
 <section id="hug">
     <h1>Sending you the warmest hug 🫂</h1>
-    <img class="hug-gif"
-         src="https://media.giphy.com/media/UhtyeG7rUP5Ifs5KpS/giphy.gif">
+    <img class="hug-gif" src="https://media.giphy.com/media/UhtyeG7rUP5Ifs5KpS/giphy.gif">
 </section>
 
 <script>
@@ -159,7 +159,7 @@ function goTo(id) {
     document.getElementById(id).classList.add("active");
 }
 
-/* OPEN ENVELOPE + START MUSIC */
+/* OPEN ENVELOPE + PLAY MUSIC */
 function openEnvelope() {
     const music = document.getElementById("music");
     music.play().catch(e => {
