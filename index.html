@@ -28,18 +28,19 @@ section.active {
     display: flex;
 }
 
-.envelope {
+.envelope, .button {
     background: #fff;
     color: #f38aa3;
-    padding: 40px 50px;
+    padding: 20px 40px;
     border-radius: 25px;
     font-size: 22px;
     cursor: pointer;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
     transition: transform 0.3s ease;
+    margin: 10px;
 }
 
-.envelope:hover {
+.envelope:hover, .button:hover {
     transform: scale(1.05);
 }
 
@@ -92,6 +93,7 @@ section.active {
 <!-- START -->
 <section id="start" class="active">
     <h1>🎄 Merry Christmas 🎄</h1>
+    <div class="button" onclick="playMusic()">Play Music 🎵</div>
     <div class="envelope" onclick="goTo('game')">Tap to Start 💝</div>
 </section>
 
@@ -155,14 +157,14 @@ function play(cell) {
 function goTo(id) {
     document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
     document.getElementById(id).classList.add("active");
+}
 
-    // Automatically play music when envelope is shown
-    if(id === "envelope"){
-        const music = document.getElementById("music");
-        music.play().catch(e=>{
-            console.log("Autoplay blocked. Tap anywhere to play manually.");
-        });
-    }
+/* PLAY MUSIC BUTTON */
+function playMusic() {
+    const music = document.getElementById("music");
+    music.play().catch(e => {
+        alert("Tap anywhere to start the music!");
+    });
 }
 </script>
 
