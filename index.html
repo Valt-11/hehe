@@ -92,6 +92,7 @@ section.active {
   <source src="https://dl.dropboxusercontent.com/scl/fi/cxpiz6swa4jkldveq1ztz/Die-With-A-Smile-PagalHits-AudioTrimmer.com.mp3" type="audio/mpeg">
 </audio>
 
+
 <!-- START -->
 <section id="start" class="active">
     <h1>🎄 Merry Christmas 🎄</h1>
@@ -164,9 +165,19 @@ function goTo(id) {
 /* ENVELOPE OPEN = MUSIC START */
 function openEnvelope() {
     const music = document.getElementById("music");
-    music.currentTime = 28; // start from 28 seconds
-    music.play();
+
+    // Wait until audio metadata is loaded so currentTime can be set
+    music.addEventListener('loadedmetadata', function() {
+        music.currentTime = 28; // jump to 28 seconds
+        music.play();
+    }, { once: true });
+
+    // Trigger loading in case it hasn't started yet
+    music.load();
+
     goTo("message");
+}
+
 }
 </script>
 
