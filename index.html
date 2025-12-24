@@ -28,19 +28,19 @@ section.active {
     display: flex;
 }
 
-.envelope, .button {
+.envelope {
     background: #fff;
     color: #f38aa3;
-    padding: 20px 40px;
+    padding: 30px 50px;
     border-radius: 25px;
     font-size: 22px;
     cursor: pointer;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
     transition: transform 0.3s ease;
-    margin: 10px;
+    margin-top: 20px;
 }
 
-.envelope:hover, .button:hover {
+.envelope:hover {
     transform: scale(1.05);
 }
 
@@ -86,17 +86,14 @@ section.active {
 <body>
 
 <!-- MUSIC -->
-<!-- MUSIC -->
 <audio id="music" loop>
   <source src="https://dl.dropboxusercontent.com/s/cxpiz6swa4jkldveq1ztz/Die-With-A-Smile-PagalHits-AudioTrimmer.com.mp3" type="audio/mpeg">
   Your browser does not support the audio element.
 </audio>
 
-
 <!-- START -->
 <section id="start" class="active">
     <h1>🎄 Merry Christmas 🎄</h1>
-    <div class="button" onclick="playMusic()">Play Music 🎵</div>
     <div class="envelope" onclick="goTo('game')">Tap to Start 💝</div>
 </section>
 
@@ -109,7 +106,7 @@ section.active {
 <!-- ENVELOPE -->
 <section id="envelope">
     <h1>You Won 💕</h1>
-    <div class="envelope" onclick="goTo('message')">Open Envelope ✉️</div>
+    <div class="envelope" onclick="openEnvelope()">Open Envelope ✉️</div>
 </section>
 
 <!-- MESSAGE -->
@@ -162,12 +159,13 @@ function goTo(id) {
     document.getElementById(id).classList.add("active");
 }
 
-/* PLAY MUSIC BUTTON */
-function playMusic() {
+/* OPEN ENVELOPE + START MUSIC */
+function openEnvelope() {
     const music = document.getElementById("music");
     music.play().catch(e => {
         alert("Tap anywhere to start the music!");
     });
+    goTo("message");
 }
 </script>
 
