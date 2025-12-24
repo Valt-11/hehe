@@ -28,10 +28,6 @@ section.active {
     display: flex;
 }
 
-h1, p {
-    margin: 10px;
-}
-
 button {
     padding: 15px 35px;
     font-size: 18px;
@@ -48,7 +44,6 @@ button {
     display: grid;
     grid-template-columns: repeat(3, 90px);
     gap: 12px;
-    margin-top: 20px;
 }
 
 .cell {
@@ -68,181 +63,107 @@ button {
     background: #ffd1dc;
 }
 
-/* Message box */
+/* Message */
 .message-box {
     background: rgba(255,255,255,0.95);
     color: #f38aa3;
     padding: 20px;
     border-radius: 20px;
-    max-width: 340px;
+    max-width: 360px;
 }
 
-/* Hug GIF */
 .hug-gif {
     width: 260px;
     border-radius: 20px;
     margin-top: 20px;
-}
-
-/* Snow */
-.snow {
-    position: fixed;
-    top: -10px;
-    color: white;
-    font-size: 1em;
-    animation: fall linear infinite;
-}
-
-@keyframes fall {
-    to { transform: translateY(110vh); }
-}
-
-/* Confetti */
-.confetti {
-    position: fixed;
-    width: 10px;
-    height: 10px;
-    top: 0;
-    animation: confetti-fall linear forwards;
-}
-
-@keyframes confetti-fall {
-    to {
-        transform: translateY(110vh) rotate(360deg);
-        opacity: 0;
-    }
 }
 </style>
 </head>
 
 <body>
 
-<!-- 🎄 Christmas Music -->
-<audio id="music" preload="auto">
+<!-- 🎵 MUSIC -->
+<audio id="music">
   <source src="https://dl.dropboxusercontent.com/scl/fi/cxpiz6swa4jkldveq1ztz/Die-With-A-Smile-PagalHits-AudioTrimmer.com.mp3" type="audio/mpeg">
 </audio>
 
-
+<!-- START -->
 <section id="start" class="active">
     <h1>🎄 Merry Christmas 🎄</h1>
     <button onclick="goTo('game')">Start</button>
 </section>
 
+<!-- GAME -->
 <section id="game">
     <h1>Let’s Play Tic Tac Toe 😄</h1>
     <div class="grid" id="board"></div>
 </section>
 
+<!-- ENVELOPE -->
 <section id="envelope">
     <h1>You Won 💕</h1>
-    <button onclick="goTo('message')">Open Envelope ✉️</button>
-    <button id="music-btn" onclick="toggleMusic()">Play Music 🎵</button>
+    <button onclick="openEnvelope()">Open Envelope ✉️</button>
 </section>
 
+<!-- MESSAGE -->
 <section id="message">
     <div class="message-box">
         <p>
-        Merry Christmas! I know I can't make something perfect, but this is a little try...
-        Hopefully, you like it. You are the best gift in my life 😄.
-        I don’t need any Christmas gift because I already have you.
-        Take my love and care hehe. Be safe, okay?
+Merry merry merry Christmas 🎄🎁 to my cute kind amazing woman…
+You are brave, strong, soft, and kind.  
+I’m so glad to have you in my life 🥺❤️  
+
+I don’t want any Christmas gift because I already have the best one — **you**.  
+Take care, be safe, and remember I’m always by your side 🫂
         </p>
-        <button onclick="goTo('final')">Continue</button>
+        <button onclick="goTo('hug')">Continue</button>
     </div>
 </section>
 
-<section id="final">
-    <h1>YOU ARE THE BEST &lt;3</h1>
-    <button onclick="hug()">Hug 🤍</button>
-</section>
-
+<!-- HUG -->
 <section id="hug">
     <h1>Sending you the warmest hug 🫂</h1>
     <img class="hug-gif"
-         src="https://media.giphy.com/media/UhtyeG7rUP5Ifs5KpS/giphy.gif"
-         alt="Cute Teddy Hug GIF">
+         src="https://media.giphy.com/media/UhtyeG7rUP5Ifs5KpS/giphy.gif">
 </section>
 
 <script>
+/* TIC TAC TOE (1 MOVE TO WIN) */
 const board = document.getElementById("board");
 let played = false;
 
-const initialState = ["X", "X", "", "O", "O", "X", "O", "X", "O"];
+const initialState = ["X","X","","O","O","X","O","X","O"];
 
 initialState.forEach(val => {
     const cell = document.createElement("div");
     cell.className = "cell";
     cell.textContent = val;
-
-    if (val === "") {
-        cell.onclick = () => play(cell);
-    }
+    if (val === "") cell.onclick = () => play(cell);
     board.appendChild(cell);
 });
 
 function play(cell) {
     if (played) return;
     played = true;
-
     cell.textContent = "X";
-
-    const cells = document.querySelectorAll(".cell");
-    [0,1,2].forEach(i => cells[i].classList.add("win"));
-
-    launchConfetti();
-    setTimeout(() => goTo("envelope"), 1200);
+    document.querySelectorAll(".cell")[0].classList.add("win");
+    document.querySelectorAll(".cell")[1].classList.add("win");
+    document.querySelectorAll(".cell")[2].classList.add("win");
+    setTimeout(() => goTo("envelope"), 800);
 }
 
+/* NAVIGATION */
 function goTo(id) {
     document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
     document.getElementById(id).classList.add("active");
-
-    if (id === "final") startSnow();
 }
 
-function toggleMusic() {
-    const audio = document.getElementById("music");
-    const btn = document.getElementById("music-btn");
-
-    if (audio.paused) {
-        audio.play();
-        btn.textContent = "Pause Music ⏸️";
-    } else {
-        audio.pause();
-        btn.textContent = "Play Music 🎵";
-    }
-}
-
-function hug() {
-    if (navigator.vibrate) {
-        navigator.vibrate([200, 100, 200, 100, 300]);
-    }
-    goTo("hug");
-}
-
-function startSnow() {
-    setInterval(() => {
-        const snow = document.createElement("div");
-        snow.className = "snow";
-        snow.innerHTML = "❄";
-        snow.style.left = Math.random() * window.innerWidth + "px";
-        snow.style.animationDuration = (Math.random() * 3 + 2) + "s";
-        document.body.appendChild(snow);
-        setTimeout(() => snow.remove(), 5000);
-    }, 200);
-}
-
-function launchConfetti() {
-    for (let i = 0; i < 100; i++) {
-        const confetti = document.createElement("div");
-        confetti.className = "confetti";
-        confetti.style.backgroundColor = `hsl(${Math.random()*360},100%,50%)`;
-        confetti.style.left = Math.random() * window.innerWidth + "px";
-        confetti.style.animationDuration = (Math.random()*3 + 2) + "s";
-        confetti.style.width = confetti.style.height = (Math.random()*8 + 5) + "px";
-        document.body.appendChild(confetti);
-        setTimeout(() => confetti.remove(), 5000);
-    }
+/* ENVELOPE = MUSIC START */
+function openEnvelope() {
+    const music = document.getElementById("music");
+    music.currentTime = 28;   // start from 28 seconds
+    music.play();
+    goTo("message");
 }
 </script>
 
