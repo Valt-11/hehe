@@ -48,6 +48,7 @@ section.active {
     display: grid;
     grid-template-columns: repeat(3, 90px);
     gap: 12px;
+    margin-top: 20px;
 }
 
 .cell {
@@ -87,14 +88,14 @@ section.active {
 
 <!-- MUSIC -->
 <audio id="music" loop>
-  <source src="https://voca.ro/126Uym0Qyh4X" type="audio/mpeg">
+  <source src="https://voca.ro/download/126Uym0Qyh4X" type="audio/mpeg">
   Your browser does not support the audio element.
 </audio>
 
 <!-- START -->
 <section id="start" class="active">
     <h1>🎄 Merry Christmas 🎄</h1>
-    <div class="envelope" onclick="goTo('game')">Tap to Start 💝</div>
+    <div class="envelope" onclick="startGame()">Tap to Start 💝</div>
 </section>
 
 <!-- GAME -->
@@ -159,12 +160,17 @@ function goTo(id) {
     document.getElementById(id).classList.add("active");
 }
 
-/* OPEN ENVELOPE + PLAY MUSIC */
-function openEnvelope() {
+/* START GAME + MUSIC */
+function startGame() {
     const music = document.getElementById("music");
     music.play().catch(e => {
         alert("Tap anywhere to start the music!");
     });
+    goTo("game");
+}
+
+/* OPEN ENVELOPE */
+function openEnvelope() {
     goTo("message");
 }
 </script>
