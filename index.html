@@ -28,15 +28,20 @@ section.active {
     display: flex;
 }
 
-button {
-    padding: 15px 35px;
-    font-size: 18px;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
+/* Envelope */
+.envelope {
     background: #fff;
     color: #f38aa3;
-    margin-top: 20px;
+    padding: 40px 50px;
+    border-radius: 25px;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.envelope:hover {
+    transform: scale(1.05);
 }
 
 /* Tic Tac Toe */
@@ -67,9 +72,9 @@ button {
 .message-box {
     background: rgba(255,255,255,0.95);
     color: #f38aa3;
-    padding: 20px;
-    border-radius: 20px;
-    max-width: 360px;
+    padding: 22px;
+    border-radius: 22px;
+    max-width: 380px;
 }
 
 .hug-gif {
@@ -90,7 +95,7 @@ button {
 <!-- START -->
 <section id="start" class="active">
     <h1>🎄 Merry Christmas 🎄</h1>
-    <button onclick="goTo('game')">Start</button>
+    <div class="envelope" onclick="goTo('game')">Tap to Start 💝</div>
 </section>
 
 <!-- GAME -->
@@ -102,21 +107,21 @@ button {
 <!-- ENVELOPE -->
 <section id="envelope">
     <h1>You Won 💕</h1>
-    <button onclick="openEnvelope()">Open Envelope ✉️</button>
+    <div class="envelope" onclick="openEnvelope()">Open Envelope ✉️</div>
 </section>
 
 <!-- MESSAGE -->
 <section id="message">
     <div class="message-box">
         <p>
-Merry merry merry Christmas 🎄🎁 to my cute kind amazing woman…
-You are brave, strong, soft, and kind.  
-I’m so glad to have you in my life 🥺❤️  
+Merry merry merry Christmas 🎄🎁  
+To my cute, kind, amazing woman ❤️  
+You are brave, strong, soft, and beautiful.  
 
-I don’t want any Christmas gift because I already have the best one — **you**.  
-Take care, be safe, and remember I’m always by your side 🫂
+I don’t want any gift because I already have the best one — **you**.  
+Take care and be safe. I’m always with you 🫂
         </p>
-        <button onclick="goTo('hug')">Continue</button>
+        <div class="envelope" onclick="goTo('hug')">Continue 🤍</div>
     </div>
 </section>
 
@@ -128,7 +133,7 @@ Take care, be safe, and remember I’m always by your side 🫂
 </section>
 
 <script>
-/* TIC TAC TOE (1 MOVE TO WIN) */
+/* TIC TAC TOE */
 const board = document.getElementById("board");
 let played = false;
 
@@ -146,9 +151,8 @@ function play(cell) {
     if (played) return;
     played = true;
     cell.textContent = "X";
-    document.querySelectorAll(".cell")[0].classList.add("win");
-    document.querySelectorAll(".cell")[1].classList.add("win");
-    document.querySelectorAll(".cell")[2].classList.add("win");
+    const cells = document.querySelectorAll(".cell");
+    [0,1,2].forEach(i => cells[i].classList.add("win"));
     setTimeout(() => goTo("envelope"), 800);
 }
 
@@ -158,10 +162,10 @@ function goTo(id) {
     document.getElementById(id).classList.add("active");
 }
 
-/* ENVELOPE = MUSIC START */
+/* ENVELOPE OPEN = MUSIC */
 function openEnvelope() {
     const music = document.getElementById("music");
-    music.currentTime = 28;   // start from 28 seconds
+    music.currentTime = 28;
     music.play();
     goTo("message");
 }
